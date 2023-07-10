@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class OrderNotFountExceptionHandler {
-    @ExceptionHandler(OrderNotFoundException.class)
-    public ResponseEntity<String> getMessage() {
-        return new ResponseEntity<>("Message : Order not Found" , HttpStatus.NOT_FOUND);
+public class NotFoundExceptionHandler {
+    @ExceptionHandler(NotFoundException.class)
+    public String getMessage(String message) {
+        return message;
     }
 }

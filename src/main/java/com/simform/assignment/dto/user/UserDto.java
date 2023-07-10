@@ -1,4 +1,4 @@
-package com.simform.assignment.dto;
+package com.simform.assignment.dto.user;
 
 import lombok.Data;
 import lombok.Value;

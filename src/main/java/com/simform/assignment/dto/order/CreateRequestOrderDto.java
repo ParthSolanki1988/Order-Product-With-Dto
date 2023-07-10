@@ -1,8 +1,8 @@
-package com.simform.assignment.dto;
+package com.simform.assignment.dto.order;
 
+import com.simform.assignment.dto.product.ProductDto;
+import com.simform.assignment.dto.user.UserDto;
 import com.simform.assignment.entity.Order;
-import com.simform.assignment.entity.Product;
-import com.simform.assignment.entity.User;
 import lombok.Data;
 
 import java.util.List;

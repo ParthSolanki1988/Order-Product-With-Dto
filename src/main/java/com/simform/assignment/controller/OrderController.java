@@ -1,8 +1,8 @@
 package com.simform.assignment.controller;
 
-import com.simform.assignment.dto.CreateRequestOrderDto;
-import com.simform.assignment.dto.CreateResponseOrderDto;
-import com.simform.assignment.entity.Order;
+import com.simform.assignment.dto.order.CreateRequestOrderDto;
+import com.simform.assignment.dto.order.CreateResponseOrderDto;
+import com.simform.assignment.mapstructmapping.MapStructMapping;
 import com.simform.assignment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,17 +16,25 @@ import java.util.List;
 public class OrderController {
     @Autowired
     OrderService orderService;
+    @Autowired
+    private MapStructMapping mapStructMapping;
 
     @PostMapping
-    public ResponseEntity<CreateRequestOrderDto> createOrder(@RequestBody CreateRequestOrderDto createRequestOrderDto) {
-        CreateRequestOrderDto order = orderService.createOrder(createRequestOrderDto);
+    public ResponseEntity<CreateResponseOrderDto> createOrder(@RequestBody CreateRequestOrderDto createRequestOrderDto) {
+        CreateResponseOrderDto order = orderService.createOrder(createRequestOrderDto);
         return new ResponseEntity<>(order , HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<CreateResponseOrderDto>> getAll() {
         List<CreateResponseOrderDto> allUser = orderService.getAllUser();
-//        List<Order> orderList = orderService.getAll();
         return new ResponseEntity<>(allUser, HttpStatus.FOUND);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<CreateResponseOrderDto> updateOrder(@PathVariable("id") Long id , CreateRequestOrderDto createRequestOrderDto){
+        CreateResponseOrderDto orderDto = orderService.updateOrderById(id);
+        return new ResponseEntity<>(orderDto , HttpStatus.FOUND);
+
     }
 }

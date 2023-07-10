@@ -1,11 +1,11 @@
 package com.simform.assignment.service;
 
-import com.simform.assignment.dto.CreateRequestOrderDto;
-import com.simform.assignment.dto.CreateResponseOrderDto;
+import com.simform.assignment.dto.order.CreateRequestOrderDto;
+import com.simform.assignment.dto.order.CreateResponseOrderDto;
 import com.simform.assignment.entity.Order;
-import com.simform.assignment.exception.OrderNotFoundException;
+import com.simform.assignment.exception.NotFoundException;
 import com.simform.assignment.mapstructmapping.MapStructMapping;
-import com.simform.assignment.repository.OderRepository;
+import com.simform.assignment.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class OrderService {
     @Autowired
-    OderRepository oderRepository;
+    OrderRepository orderRepository;
 
     @Autowired
     MapStructMapping mapStructMapping;
@@ -25,30 +25,40 @@ public class OrderService {
 
     }
 
-    public List<Order> getAll() {
-        List<Order> orderList = oderRepository.findAll();
-        if (orderList.size() == 0) {
-            throw new OrderNotFoundException();
+//    public List<Order> getAll() {
+//        List<Order> orderList = orderRepository.findAll();
+//        if (orderList.size() == 0) {
+////            throw new NotFoundException();
+//        } else {
+//            return orderList;
+//        }
+//    }
+    public CreateResponseOrderDto updateOrderById(Long id) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        Optional<CreateRequestOrderDto> createRequestOrderDto = optionalOrder.map(mapStructMapping::toDto);
+        if(createRequestOrderDto.isEmpty()) {
+            throw new NotFoundException("Order Not Found");
         } else {
-            return orderList;
-        }
-    }
-    public Order getById(Long id) {
-        Optional<Order> orderById = oderRepository.findById(id);
-        if(orderById.isEmpty()) {
-            throw new OrderNotFoundException();
-        } else {
-            return orderById.get();
+            Order order = mapStructMapping.toOrder(createRequestOrderDto.get());
+            Order saveOrder = orderRepository.save(order);
+            return mapStructMapping.toResponseDto(saveOrder);
         }
     }
 
-    public CreateRequestOrderDto createOrder(CreateRequestOrderDto createRequestOrderDto) {
+    public CreateResponseOrderDto createOrder(CreateRequestOrderDto createRequestOrderDto) {
         Order order = mapStructMapping.toOrder(createRequestOrderDto);
-        Order save = oderRepository.save(order);
-        return mapStructMapping.toDto(save);
+        Order save = orderRepository.save(order);
+        return mapStructMapping.toResponseDto(save);
     }
 
     public List<CreateResponseOrderDto> getAllUser() {
-        return oderRepository.findAll().stream().map(mapStructMapping::orderToDto).collect(Collectors.toList());
+
+        List<CreateResponseOrderDto> listOfOrderResponseDto = orderRepository.findAll().stream().map(mapStructMapping::orderToDto).collect(Collectors.toList());
+        if (listOfOrderResponseDto.size() == 0){
+            throw  new NotFoundException("List is Empty");
+        }
+        else {
+            return listOfOrderResponseDto;
+        }
     }
 }

@@ -1,9 +1,11 @@
 package com.simform.assignment.mapstructmapping;
 
-import com.simform.assignment.dto.CreateRequestOrderDto;
-import com.simform.assignment.dto.CreateResponseOrderDto;
-import com.simform.assignment.dto.ProductDto;
-import com.simform.assignment.dto.UserDto;
+import com.simform.assignment.dto.order.CreateRequestOrderDto;
+import com.simform.assignment.dto.order.CreateResponseOrderDto;
+import com.simform.assignment.dto.product.CreateResponseProductDto;
+import com.simform.assignment.dto.product.ProductDto;
+import com.simform.assignment.dto.user.CreateResponseUserDto;
+import com.simform.assignment.dto.user.UserDto;
 import com.simform.assignment.entity.Order;
 import com.simform.assignment.entity.Product;
 import com.simform.assignment.entity.User;
@@ -16,6 +18,8 @@ public interface MapStructMapping {
 
   CreateRequestOrderDto toDto(Order order);
 
+  CreateResponseOrderDto toResponseDto(Order order);
+
   Order toOrder(CreateRequestOrderDto createRequestOrderDto);
 
   UserDto userToUserDto(User user);
@@ -24,6 +28,9 @@ public interface MapStructMapping {
 
   ProductDto productToProductDto(Product product);
 
+  CreateResponseUserDto userToResponseUserDto(User user);
+
+  CreateResponseProductDto productToResponseProductDto(Product product);
   Product productDtoToProduct(ProductDto productDto);
 
   List<ProductDto> productListToProductDtoList(List<Product> list);

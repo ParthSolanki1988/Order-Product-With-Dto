@@ -1,9 +1,9 @@
-package com.simform.assignment.dto;
+package com.simform.assignment.dto.order;
 
+import com.simform.assignment.dto.product.ProductDto;
+import com.simform.assignment.dto.user.UserDto;
 import lombok.Data;
-import lombok.Value;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
