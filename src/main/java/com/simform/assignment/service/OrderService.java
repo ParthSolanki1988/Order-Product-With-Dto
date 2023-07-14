@@ -25,14 +25,6 @@ public class OrderService {
 
     }
 
-//    public List<Order> getAll() {
-//        List<Order> orderList = orderRepository.findAll();
-//        if (orderList.size() == 0) {
-////            throw new NotFoundException();
-//        } else {
-//            return orderList;
-//        }
-//    }
     public CreateResponseOrderDto updateOrderById(Long id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         Optional<CreateRequestOrderDto> createRequestOrderDto = optionalOrder.map(mapStructMapping::toDto);

@@ -30,8 +30,4 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
 
-//    public void addOrder(OrderEntity order) {
-//        orders.add(order);
-//    }
-
 }

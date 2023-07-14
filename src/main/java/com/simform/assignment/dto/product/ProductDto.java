@@ -11,4 +11,11 @@ import java.io.Serializable;
 @Data
 public class ProductDto {
   String productName;
+
+  public ProductDto(String productName) {
+    this.productName = productName;
+  }
+
+  public ProductDto() {
+  }
 }

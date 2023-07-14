@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 public class CreateResponseOrderDto {
-  Long orderId;
+//  Long id;
   UserDto user;
   List<ProductDto> products;
 }

@@ -4,12 +4,14 @@ import com.simform.assignment.dto.order.CreateRequestOrderDto;
 import com.simform.assignment.dto.order.CreateResponseOrderDto;
 import com.simform.assignment.dto.product.CreateResponseProductDto;
 import com.simform.assignment.dto.product.ProductDto;
+import com.simform.assignment.dto.user.CreateRequestUserDto;
 import com.simform.assignment.dto.user.CreateResponseUserDto;
 import com.simform.assignment.dto.user.UserDto;
 import com.simform.assignment.entity.Order;
 import com.simform.assignment.entity.Product;
 import com.simform.assignment.entity.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.control.MappingControl;
 
 import java.util.List;
 
@@ -38,4 +40,7 @@ public interface MapStructMapping {
   List<Product> productDtoListToProductList(List<ProductDto> list);
 
   CreateResponseOrderDto orderToDto(Order order);
+
+  User createRequestUserDtoToUser(CreateRequestUserDto createRequestUserDto);
+
 }

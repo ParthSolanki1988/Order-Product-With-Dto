@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/order")
+@RequestMapping("/api/v1/orderbook")
 public class OrderController {
     @Autowired
     OrderService orderService;
     @Autowired
-    private MapStructMapping mapStructMapping;
+    MapStructMapping mapStructMapping;
 
     @PostMapping
     public ResponseEntity<CreateResponseOrderDto> createOrder(@RequestBody CreateRequestOrderDto createRequestOrderDto) {
